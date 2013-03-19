@@ -1,8 +1,8 @@
 {
     "name" : "sibling",
-    "version" : "0.0.1",
+    "version" : "0.0.2",
     "keywords" : ["multiprocess", "ipc"],
-    "author" : "Marat Dulin <mdevils@yandex-team.ru>",
+    "author" : "Marat Dulin <mdevils@yandex.ru>",
     "dependencies": {
         "inherit": "*",
         "vow": "*"

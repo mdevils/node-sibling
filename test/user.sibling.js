@@ -17,5 +17,11 @@ module.exports = sibling.declare({
             ]);
         }, 1000);
         return promise;
+    },
+    getMotherName: function() {
+        throw new Error('Private info');
+    },
+    getFatherName: function() {
+        return Vow.reject(new Error('Unknown info'));
     }
 });
