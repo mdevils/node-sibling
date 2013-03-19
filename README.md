@@ -18,6 +18,7 @@ Master process code, **runner.js**.
 var Vow = require('vow'),
     UserSibling = require('./user.js');
 
+// Local UserSibling instance usage.
 var user = UserSibling.create('Nick');
 Vow.when(user.getName()).then(function() {
     console.log('local user name', user.getName());
@@ -33,6 +34,7 @@ Vow.when(user.getName()).then(function() {
     });
 });
 
+// Child process UserSibling instance usage.
 var userSibling = UserSibling.fork('Nick');
 Vow.when(userSibling.getName()).then(function(name) {
     console.log('sibling user name', name);
