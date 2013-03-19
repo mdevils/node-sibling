@@ -52,7 +52,7 @@ Vow.when(userSibling.getName()).then(function(name) {
 });
 ```
 
-Child/master shared code, **user.js**.
+Child/Master shared code, **user.js**.
 ```javascript
 var sibling = require('../index'),
     Vow = require('vow');
