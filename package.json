@@ -1,0 +1,12 @@
+{
+    "name" : "sibling",
+    "version" : "0.0.1",
+    "keywords" : ["multiprocess", "ipc"],
+    "author" : "Marat Dulin <mdevils@yandex-team.ru>",
+    "dependencies": {
+        "inherit": "*",
+        "vow": "*"
+    },
+    "main" : "index",
+    "engines" : { "node" : ">= 0.8.0" }
+}
