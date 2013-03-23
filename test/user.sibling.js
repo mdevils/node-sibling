@@ -4,6 +4,9 @@ var sibling = require('../index'),
 module.exports = sibling.declare({
     __constructor: function(name) {
         this._name = name;
+        this.on('secret-event', function() {
+            console.log('Secret event!!');
+        });
     },
     getName: function() {
         return this._name;
@@ -23,5 +26,8 @@ module.exports = sibling.declare({
     },
     getFatherName: function() {
         return Vow.reject(new Error('Unknown info'));
+    },
+    doSomething: function() {
+        this.emit('event', 'something was done');
     }
 });

@@ -1,4 +1,5 @@
 var Vow = require('vow'),
+    Worker = require('../lib/worker.js'),
     UserSibling = require('./user.sibling.js');
 
 var user = UserSibling.create('Nick');
@@ -10,9 +11,16 @@ user.getName().then(function(name) {
         return Vow.when(user.getMotherName());
     }).fail(function(error) {
         console.log('local user mother name ', error.toString());
-        Vow.when(user.getFatherName()).fail(function(error) {
+        return Vow.when(user.getFatherName()).fail(function(error) {
             console.log('local user father name ', error.toString());
-            user.dispose();
+            user.on('event', function(data) {
+                console.log('local user event: ', data);
+                user.emit('secret-event').then(function() {
+                    user.dispose();
+                });
+            }).then(function() {
+                return user.doSomething();
+            });
         });
     });
 });
@@ -26,10 +34,30 @@ userSibling.getName().then(function(name) {
         return Vow.when(userSibling.getMotherName());
     }).fail(function(error) {
         console.log('sibling user mother name ', error.toString());
-        Vow.when(userSibling.getFatherName()).fail(function(error) {
+        return Vow.when(userSibling.getFatherName()).fail(function(error) {
             console.log('sibling user father name ', error.toString());
-            userSibling.dispose();
+            userSibling.on('event', function(data) {
+                console.log('sibling user event: ', data);
+                userSibling.emit('secret-event').then(function() {
+                    userSibling.dispose();
+                });
+            }).then(function() {
+                return userSibling.doSomething();
+            });
         });
     });
 });
 
+var worker = new Worker();
+worker.start();
+worker.on('lastObjectDisposed', function() {
+    worker.stop();
+});
+var user1 = worker.createObject(UserSibling, ['Garry']),
+    user2 = worker.createObject(UserSibling, ['Gordon']);
+
+Vow.all([user1.getName(), user2.getName()]).then(function(names) {
+    console.log('multiple get names: ', names);
+    user1.dispose();
+    user2.dispose();
+});
