@@ -30,6 +30,7 @@ Vow.when(user.getName()).then(function() {
         console.log('local user mother name ', error.toString());
         Vow.when(user.getFatherName()).fail(function(error) {
             console.log('local user father name ', error.toString());
+            user.dispose();
         });
     });
 });
