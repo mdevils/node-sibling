@@ -12,14 +12,14 @@ module.exports = sibling.declare({
         return this._name;
     },
     getFriends: function() {
-        var promise = Vow.promise();
+        var defer = Vow.defer();
         setTimeout(function() {
-            promise.fulfill([
+            defer.resolve([
                 'Michael',
                 'George'
             ]);
         }, 1000);
-        return promise;
+        return defer.promise();
     },
     getMotherName: function() {
         throw new Error('Private info');
