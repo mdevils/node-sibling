@@ -1,4 +1,4 @@
-node-sibling
+node-sibling [![Build Status](https://travis-ci.org/mdevils/node-sibling.png?branch=master)](https://travis-ci.org/mdevils/node-sibling)
 ============
 
 Fast and easy IPC for node.
