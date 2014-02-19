@@ -8,7 +8,7 @@ var Sibling = require('./lib/sibling');
                 errLines = err.stack.split('\n');
             errLines.shift();
             errLines.shift();
-            var match = (/\(([^:]+):(\d+)/g).exec(errLines.shift()),
+            var match = (/\(((?:\w{1}:)?[^:]+):(\d+)/g).exec(errLines.shift()),
                 filename = match[1],
                 line = match[2],
                 sibling = new Sibling(filename, line, classDecl);
